@@ -1,0 +1,53 @@
+{
+  "name": "my-webpack-project",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.14.5",
+    "@babel/runtime": "^7.14.6",
+    "@types/axios": "^0.14.0",
+    "@types/express": "^4.17.12",
+    "@types/mini-css-extract-plugin": "^2.0.0",
+    "@types/node": "^15.14.0",
+    "@types/react": "^17.0.13",
+    "@types/react-dom": "^17.0.8",
+    "@types/webpack-merge": "^5.0.0",
+    "@types/webpack-node-externals": "^2.5.2",
+    "@webpack-cli/generators": "^2.2.0",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "concurrently": "^6.2.0",
+    "css-loader": "^5.2.6",
+    "html-webpack-plugin": "^5.3.2",
+    "mini-css-extract-plugin": "^2.0.0",
+    "nodemon": "^2.0.12",
+    "sass": "^1.35.1",
+    "sass-loader": "^12.1.0",
+    "ts-loader": "^9.2.3",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.5",
+    "webpack": "^5.42.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-merge": "^5.8.0",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "scripts": {
+    "dev:watch": "concurrently \"webpack --config ./webpack/server.webpack.ts -w\" \"webpack --config ./webpack/client.webpack.ts -w\"",
+    "dev:server": "nodemon build/server/server.js -w ./src/server",
+    "dev": "concurrently \"yarn dev:server\" \"yarn dev:watch\"",
+    "build:server": "webpack --config ./webpack/server.webpack.ts --node-env=production",
+    "build:client": "webpack --config ./webpack/client.webpack.ts --node-env=production",
+    "build-and-run": "concurrently \"yarn build:server\" \"yarn build:client\" && node build/server/server.js",
+    "test": "nyc mocha ./test/server/* ./test/server/*/* --require ts-node/register --recursive"
+  }
+}
